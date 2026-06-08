@@ -1,0 +1,277 @@
+Below is a **clean whitepaper draft** based strictly on your latest architecture (non-custodial, no matching engine, no pricing authority, no escrow by PeerSwap, user-controlled multi-sig “atomic wallets,” PeerSwap as coordination + math + discovery layer).
+
+I’ll keep it structured like a real protocol paper, but aligned with what you actually designed.
+
+---
+
+# **PeerSwap Protocol**
+
+## A Non-Custodial Coordination Layer for Multi-Party Value Conversion
+
+### Version 0.1 — Draft Whitepaper
+
+---
+
+## 1. Abstract
+
+PeerSwap is a non-custodial coordination protocol that enables multi-party value conversion between fiat-linked digital assets and cryptocurrencies without centralized custody, escrow, or price control.
+
+The protocol does not operate as an exchange, broker, or custodian. Instead, it provides a real-time coordination interface that allows participants to discover conversion opportunities, select counterparties, and construct shared cryptographic settlement objects.
+
+PeerSwap functions as a **coordination and allocation layer**, not an execution or settlement authority.
+
+---
+
+## 2. Problem Statement
+
+Modern financial systems rely on centralized intermediaries to convert value between fiat and digital assets. These intermediaries introduce:
+
+* custody risk
+* counterparty concentration
+* execution opacity
+* restricted access to liquidity
+* high friction in multi-party conversion scenarios
+
+Even decentralized systems often fail to efficiently route fragmented liquidity across multiple participants without introducing custodial or escrow-based structures.
+
+There is a need for a system that enables:
+
+> direct, user-controlled value conversion across multiple counterparties without centralized custody or execution control.
+
+---
+
+## 3. Design Principles
+
+PeerSwap is built on the following principles:
+
+### 3.1 Non-Custodial by Design
+
+PeerSwap never holds user funds, private keys, or assets at any point in the protocol lifecycle.
+
+### 3.2 No Execution Authority
+
+PeerSwap does not execute, finalize, or enforce transactions.
+
+### 3.3 No Counterparty Matching Engine
+
+PeerSwap does not assign or enforce trading pairs. All counterparties are selected by users.
+
+### 3.4 External Price Reference
+
+All conversion rates are sourced from independent third-party data providers and are not controlled or modified by PeerSwap.
+
+### 3.5 User-Controlled Settlement
+
+All settlement actions are initiated and signed by participating users.
+
+---
+
+## 4. System Overview
+
+PeerSwap consists of three core layers:
+
+### 4.1 Discovery Layer
+
+A real-time interface displaying participants expressing conversion intent, such as:
+
+* asset type held (e.g., BTC, xCAD)
+* desired conversion asset (e.g., CAD, BTC)
+* available amount
+* live reference rate (external source)
+
+No pairing or matching is performed.
+
+---
+
+### 4.2 Allocation Layer (User-Driven)
+
+Users may select one or more counterparties via a multi-selection interface.
+
+PeerSwap computes allocation breakdowns based on:
+
+* selected counterparties
+* real-time external pricing feeds
+* user-defined amounts
+
+This layer performs **mathematical distribution only**, not enforcement or execution.
+
+---
+
+### 4.3 Settlement Layer (User-Controlled Multi-Signature Wallets)
+
+Upon mutual user selection, a shared cryptographic wallet is generated.
+
+Key properties:
+
+* keys are held exclusively by participating users
+* PeerSwap does not hold or generate private keys
+* funds are controlled only by multi-party signature agreement
+* transactions require user consent from all participating parties
+
+PeerSwap does not participate in signing or execution.
+
+---
+
+## 5. Transaction Flow
+
+### Step 1 — Intent Declaration
+
+Users publish conversion intent:
+
+* “I want to convert BTC → CAD”
+* “I want to convert CAD → BTC”
+
+---
+
+### Step 2 — Discovery
+
+PeerSwap displays a live set of counterparties expressing inverse intent.
+
+No ranking or matching is enforced.
+
+---
+
+### Step 3 — User Selection
+
+Users select counterparties manually via checkbox interface.
+
+Multiple counterparties may be selected to fulfill partial allocations.
+
+---
+
+### Step 4 — Allocation Computation
+
+PeerSwap calculates proportional distribution based on:
+
+* selected counterparties
+* available liquidity
+* external price feeds
+
+Output is informational only.
+
+---
+
+### Step 5 — Shared Wallet Creation
+
+A multi-signature wallet is created jointly between participants.
+
+PeerSwap does not control wallet creation keys.
+
+---
+
+### Step 6 — User Execution
+
+Participants independently sign and execute transactions.
+
+Settlement occurs only when all required signatures are provided.
+
+---
+
+## 6. Architecture Non-Claims
+
+PeerSwap explicitly does NOT:
+
+* hold user funds
+* provide escrow services
+* act as a custodian
+* guarantee trade execution
+* set or guarantee pricing
+* operate a matching engine
+* intermediate fiat transfers
+
+---
+
+## 7. Security Model
+
+Security is derived from:
+
+* cryptographic multi-signature wallets
+* user-controlled key ownership
+* external price data integrity
+* deterministic allocation logic
+
+PeerSwap does not introduce custody risk vectors.
+
+---
+
+## 8. Trust Model
+
+PeerSwap is a **zero-custody coordination system**.
+
+Trust assumptions:
+
+* users trust their own key management
+* users trust counterparties to execute signed agreements
+* users trust external price feeds for reference accuracy
+
+PeerSwap is not part of the trust chain for asset control.
+
+---
+
+## 9. Economic Model
+
+PeerSwap does not charge per-transaction fees tied to settlement.
+
+Potential funding models include:
+
+* protocol subscription for interface access
+* donation-based treasury
+* DAO-funded development pool
+* optional premium analytics tooling
+
+No revenue is derived from custody, execution, or settlement volume.
+
+---
+
+## 10. Governance (Optional DAO Layer)
+
+PeerSwap may be governed by a decentralized autonomous organization responsible for:
+
+* protocol updates
+* UI evolution
+* open-source contributions
+* infrastructure funding proposals
+
+Governance does not control user funds or transaction execution.
+
+---
+
+## 11. Limitations
+
+PeerSwap does not:
+
+* guarantee liquidity completion
+* guarantee settlement success
+* provide fiat on/off-ramp services
+* eliminate counterparty risk
+* function as a financial intermediary
+
+---
+
+## 12. Future Extensions
+
+Potential protocol extensions include:
+
+* decentralized reputation scoring for counterparties
+* improved liquidity visualization algorithms
+* advanced allocation optimization models
+* privacy-preserving intent broadcasting
+* cross-asset liquidity graphs
+
+---
+
+## 13. Conclusion
+
+PeerSwap introduces a coordination-first model for value conversion that removes custodial intermediaries while preserving user autonomy.
+
+It operates as a **neutral coordination layer for multi-party value exchange**, relying on user-controlled cryptographic settlement and external price discovery systems.
+
+---
+
+If you want next step, I can do one of these (more useful than it sounds):
+
+1. Turn this into a **technical architecture spec (APIs, data structures, wallet logic)**
+2. Or map **exactly where regulators/banks would still challenge it (stress test version)**
+3. Or redesign the UI/UX so it doesn’t accidentally “behave like an exchange” in practice
+
+Just tell me direction.
